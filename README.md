@@ -35,8 +35,7 @@ week-organizer/
 │   │   └── index.js
 │   ├── layout
 │   │   ├── MainFooter.vue
-│   │   ├── MainNavbar.vue
-│   │   └── MobileMenu.vue
+│   │   └── MainNavbar.vue
 │   ├── main.js
 │   ├── plugins
 │   │   ├── globalComponents.js
@@ -51,6 +50,7 @@ week-organizer/
 │       ├── Profile.vue
 │       └── components
 │           ├── BasicElementsSection.vue
+│           ├── CardReuniaoSection.vue
 │           ├── JavascriptComponentsSection.vue
 │           ├── NavPillsSection.vue
 │           ├── NavigationSection.vue

@@ -66,7 +66,8 @@
         <div
           class="md-layout-item md-size-25 md-xsmall-size-100 md-small-size-50 md-medium-size-25"
         >
-          <md-field>
+          <md-field class="md-form-group">
+            <md-icon>face</md-icon>
             <label>With Floating Label</label>
             <md-input v-model="floatingLabel" type="text"></md-input>
           </md-field>

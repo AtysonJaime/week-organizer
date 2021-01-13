@@ -12,7 +12,7 @@
             <div class="section section-tabs">
                 <div id="nav-tabs" class="container">
                     <div class="md-layout">
-                        <div class="md-layout-item md-size-100">
+                        <!-- <div class="md-layout-item md-size-100">
                             <nav-tabs-card no-label>
                                 <template slot="content">
                                     <md-tabs class="md-primary" md-alignment="left">
@@ -42,47 +42,20 @@
                                     </md-tabs>
                                 </template>
                             </nav-tabs-card>
-                        </div>
+                        </div> -->
                         <div class="md-layout-item md-size-100">
                             <nav-tabs-card no-label>
                                 <template slot="content">
                                     <md-tabs class="md-primary" md-alignment="left">
                                         <md-tab id="tab-atividades" md-label="Reuniões" md-icon="group">
                                             <div v-if="list_reuniao">
-                                                <md-list class="reuniao" v-if="list_reuniao">
-                                                    <md-list-item class="md-elevation-3">
-                                                        <div class="reuniao-item">
-                                                            <h5 class="reuniao-item-title">Assunto:</h5>
-                                                            <small class="reuniao-item-info">Resolver problemas internos gerados por assuntos aleatorios ocorridos no projeto X e bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</small>
-                                                            <h5 class="reuniao-item-title">Data: <small class="reuniao-item-info">05/12/2021</small></h5>
-                                                            <h5 class="reuniao-item-title">Participantes: <small class="reuniao-item-info">Atyson Jaime, Aline Balthar</small></h5>
-                                                        </div>
-                                                        <md-button class="btn-primary">click</md-button>
-                                                    </md-list-item>
-                                                    <md-list-item class="md-elevation-3">
-                                                        <div class="reuniao-item">
-                                                            <h5 class="reuniao-item-title">Assunto: <small class="reuniao-item-info">Resolver problemas internos</small></h5>
-                                                            <h5 class="reuniao-item-title">Data: <small class="reuniao-item-info">05/12/2021</small></h5>
-                                                            <h5 class="reuniao-item-title">Participantes: <small class="reuniao-item-info">Atyson Jaime, Aline Balthar</small></h5>
-                                                        </div>
-                                                    </md-list-item>
-                                                    <md-list-item class="md-elevation-3">
-                                                        <div class="reuniao-item">
-                                                            <h5 class="reuniao-item-title">Assunto: <small class="reuniao-item-info">Resolver problemas internos</small></h5>
-                                                            <h5 class="reuniao-item-title">Data: <small class="reuniao-item-info">05/12/2021</small></h5>
-                                                            <h5 class="reuniao-item-title">Participantes: <small class="reuniao-item-info">Atyson Jaime, Aline Balthar</small></h5>
-                                                        </div>
-                                                    </md-list-item>
-                                                    <md-list-item class="md-elevation-3">
-                                                        <div class="reuniao-item">
-                                                            <h5 class="reuniao-item-title">Assunto: <small class="reuniao-item-info">Resolver problemas internos</small></h5>
-                                                            <h5 class="reuniao-item-title">Data: <small class="reuniao-item-info">05/12/2021</small></h5>
-                                                            <h5 class="reuniao-item-title">Participantes: <small class="reuniao-item-info">Atyson Jaime, Aline Balthar</small></h5>
-                                                        </div>
-                                                    </md-list-item>
-                                                </md-list>
-                                                <div class="button">
-                                                    <md-button class="md-primary md-round button-apagar" @click="apagarListaReuniao()"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
+                                                <div class="content-reuniao">
+                                                    <div class="card-reuniao" v-for="(reuniao, index) in reunioes" :key='index' :data-reuniao="index" @click="apagarCardReuniao(index)" title="Apagar Reunião">
+                                                        <CardReuniao :assunto="reuniao.info" :data='reuniao.date' :group='reuniao.part'></CardReuniao>
+                                                    </div>
+                                                </div>
+                                                <div class="content-button">
+                                                    <md-button class="md-primary md-round button-apagar" @click="apagarListaReuniao" title="Apagar Toda Lista"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
                                                 </div>
                                             </div>
                                             <div class="alert alert-warning" v-else>
@@ -93,7 +66,6 @@
                                                     <b> Nenhuma reunião adicionada até o momento </b>
                                                 </div>
                                             </div>
-                                            
                                         </md-tab>
 
                                         <md-tab id="tab-form-atividades" md-label="Adicionar" md-icon="edit">
@@ -120,10 +92,12 @@
 
 <script>
 import { NavTabsCard } from "@/components";
+import CardReuniao from "./components/CardReuniaoSection";
 
 export default {
     components: {
-        NavTabsCard
+        NavTabsCard,
+        CardReuniao,
     },
     props: {
         image: {
@@ -134,16 +108,27 @@ export default {
     data(){
         return {
             list_reuniao:true,
+            reunioes: [
+                {info:"Relatados problemas nos componente x, y e z do padrão de interfaces", date:"05/01/2021", part:"Atyson Jaime, Andressa, Igor, João Vitor"},
+                {info:"Repasse de duvidas", date:"11/02/2021", part:"Atyson Jaime, Andressa"},
+                {info:"Reunião Gestore Front-end", date:"05/01/2021", part:"Atyson Jaime, Igor"},
+                {info:"Repasse de metas para as proximas etapas do Cosmos - Desing para o sistemas da Universidade Federal do Rio Grande do Norte", date:"25/05/2021", part:"Andressa, Igor, João Vitor"},
+            ],
         }
     },
     methods: {
         apagarListaReuniao() {
-            const lista = document.getElementsByClassName('reuniao')[0];
+            const lista = document.getElementsByClassName('content-reuniao')[0];
             if(lista.children.length > 0) {
                 lista.textContent = '';
             }
             this.list_reuniao = !this.list_reuniao;
         },
+        apagarCardReuniao(param) {
+            const lista = Array.from(document.getElementsByClassName('card-reuniao'));
+            const filho = lista.find(element => element.getAttribute('data-reuniao') == param);
+            filho.remove();
+        }
     },
     computed: {
         bgImage() {
@@ -161,30 +146,6 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         height: 350px;
-    }
-
-    .leaf {
-        &4 {
-            right: 385px;
-            top: -97px;
-            width: 22%;
-        }
-
-        &3 {
-            top: 90px;
-            right: 352px;
-            width: 13%;
-        }
-
-        &2 {
-            width: 22%;
-            left: 400px;
-            top: -17px;
-        }
-
-        &1 {
-            
-        }
     }
 
     .brand {
@@ -219,7 +180,8 @@ export default {
         font-weight: bold;
     }
 
-    .button {
+    // Scss do Botão apagar lista
+    .content-button {
         display: flex;
         justify-content: flex-end;
         width: 100%;
@@ -244,31 +206,16 @@ export default {
         }
     }
 
-    .reuniao {
-        background-color: transparent !important;
+    // Scss da div para reuniões
+    .content-reuniao {
+        background-color: transparent;
         max-height: 320px;
         overflow-y: auto;
+        padding: 15px;
 
-        li {
-            border-radius: 5px;
-            border: 1px solid #000;
-
-            ~li {
-                margin-top: 15px;
-            }
-        }
-
-        .reuniao-item {
-            width: 100%;
-
-            &-title {
-                font-weight: bold;
-                margin:0;
-            }
-            
-            &-info {
-                font-size: 85%;
-                color: #000;
+        .card-reuniao {
+            ~.card-reuniao {
+             margin-top: 20px;
             }
         }
     }
