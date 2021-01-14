@@ -2,19 +2,19 @@
     <md-card md-with-hover>
         <md-card-content>
             <div class="md-layout">
-                <div class="md-layout-item md-size-100">
-                    <h5 class="content-card__title">Assunto:</h5>
-                    <p>{{assunto}}</p>
+                <div class="md-layout-item md-size-50 md-medium-size-100">
+                    <h5 class="content-card__title">Projeto: </h5>
+                    <p>{{projeto}}</p>
                 </div>
-            </div>
-            <div class="md-layout">
-                <div class="md-layout-item md-size-20 md-medium-size-100">
+                <div class="md-layout-item md-size-50 md-medium-size-100">
                     <h5 class="content-card__title">Data: </h5>
                     <p>{{data}}</p>
                 </div>
-                <div class="md-layout-item md-size-80 md-medium-size-100">
-                    <h5 class="content-card__title">Participantes: </h5>
-                    <p>{{group}}</p>
+            </div>
+            <div class="md-layout">
+                <div class="md-layout-item md-size-100">
+                    <h5 class="content-card__title">Atividades Realizadas:</h5>
+                    <p>{{atividadesRealizadas}}</p>
                 </div>
             </div>
         </md-card-content>
@@ -24,7 +24,7 @@
 <script>
 export default {
     props: {
-        assunto: {
+        projeto: {
             type: String,
             require: true,
         },
@@ -32,7 +32,7 @@ export default {
             type: String,
             require: true,
         },
-        group: {
+        atividadesRealizadas: {
             type: String,
             require: true,
         },
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-// Scss da div para reuniões
+// Scss da div para atividades
     .md-card {
         margin: 0;
 

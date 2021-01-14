@@ -39,8 +39,8 @@ week-organizer/
 │   └── views
 │       ├── WeekOrganization.vue
 │       └── components
-│           ├── CardReuniaoSection.vue
-│           └── CardAtividadesSection.vue
+│           ├── CardAtividadesSection.vue
+│           └── CardReuniaoSection.vue
 └── vue.config.js
 
 ```

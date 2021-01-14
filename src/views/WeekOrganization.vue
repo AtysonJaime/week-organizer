@@ -17,27 +17,30 @@
                                 <template slot="content">
                                     <md-tabs class="md-primary" md-alignment="left">
                                         <md-tab id="tab-atividades" md-label="Atividades Realizadas" md-icon="work">
-                                            <p>
-                                                I will be the leader of a company that ends up being worth
-                                                billions of dollars, because I got the answers. I understand
-                                                culture. I am the nucleus. I think that’s a responsibility
-                                                that I have, to push possibilities, to show people, this is
-                                                the level that things could be at. I think that’s a
-                                                responsibility that I have, to push possibilities, to show
-                                                people, this is the level that things could be at.
-                                            </p>
+                                            <div v-if="list_atividades">
+                                                <div class="content-card">
+                                                    <div class="cards" v-for="(atividade, index) in atividades" :key='index' :data-atividades="index" @click="removerCardAtividade(index)" title="Remover Atividade">
+                                                        <CardAtividades :projeto ="atividade.projeto" :data="atividade.date" :atividadesRealizadas="atividade.atvRelizadas"></CardAtividades>
+                                                    </div>
+                                                </div>
+                                                <div class="content-button">
+                                                    <md-button class="md-primary button-apagar" title="Limpar Toda Lista" @click="limparListaAtividades"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
+                                                </div>
+                                            </div>
+                                            <div class="content-warning" v-else>
+                                                <div class="alert alert-warning">
+                                                    <div class="container">
+                                                        <div class="alert-icon">
+                                                            <md-icon>warning</md-icon>
+                                                        </div>
+                                                        <b> Nenhuma Atividade adicionada até o momento </b>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </md-tab>
 
                                         <md-tab id="tab-form-atividades" md-label="Adicionar" md-icon="edit">
-                                            <p>
-                                                I think that’s a responsibility that I have, to push
-                                                possibilities, to show people, this is the level that things
-                                                could be at. I will be the leader of a company that ends up
-                                                being worth billions of dollars, because I got the answers.
-                                                I understand culture. I am the nucleus. I think that’s a
-                                                responsibility that I have, to push possibilities, to show
-                                                people, this is the level that things could be at.
-                                            </p>
+                                            
                                         </md-tab>
                                     </md-tabs>
                                 </template>
@@ -49,8 +52,8 @@
                                     <md-tabs class="md-primary" md-alignment="left">
                                         <md-tab id="tab-atividades" md-label="Reuniões" md-icon="group">
                                             <div v-if="list_reuniao">
-                                                <div class="content-reuniao">
-                                                    <div class="card-reuniao" v-for="(reuniao, index) in reunioes" :key='index' :data-reuniao="index" @click="removerCardReuniao(index)" title="Remover Reunião">
+                                                <div class="content-card">
+                                                    <div class="cards" v-for="(reuniao, index) in reunioes" :key='index' :data-reuniao="index" @click="removerCardReuniao(index)" title="Remover Reunião">
                                                         <CardReuniao :assunto="reuniao.info" :data='reuniao.date' :group='reuniao.part'></CardReuniao>
                                                     </div>
                                                 </div>
@@ -112,11 +115,13 @@
 <script>
 import { NavTabsCard } from "@/components";
 import CardReuniao from "./components/CardReuniaoSection";
+import CardAtividades from "./components/CardAtividadesSection";
 
 export default {
     components: {
         NavTabsCard,
         CardReuniao,
+        CardAtividades,
     },
     props: {
         image: {
@@ -126,11 +131,20 @@ export default {
     },
     data(){
         return {
+            // Reuniões
             list_reuniao:false,
             reunioes: [],
             FormReuniaoAssunto: '',
             FormReuniaoData: new Date(),
             FormReuniaoParticipantes: '',
+
+            // Atividades
+            list_atividades:true,
+            atividades: [
+                {projeto: "Cosmos", date: "05/12/2022", atvRelizadas: "Correção de cards retangulares; Criação do conteudo principal"},
+                {projeto: "Padrão Vue", date: "05/10/2021", atvRelizadas: "Correção de cards retangulares; Criação do conteudo principal"},
+                {projeto: "Gestore Automatiza", date: "05/09/2012", atvRelizadas: "Correção de cards retangulares; Criação do conteudo principal"}
+            ],
         }
     },
     methods: {
@@ -184,6 +198,19 @@ export default {
             };
         },
 
+        //Atividades
+        limparListaAtividades(){
+            this.atividades = [];
+            //this.saveReuniaoLS();
+            this.list_atividades = false;
+        },
+        removerCardAtividade(param) {
+            this.atividades.splice(param,1);
+            //this.saveReuniaoLS();
+            if(this.atividades.length === 0) {
+                this.list_atividades = false;
+            }
+        },
         //Funções Gerais
         retornaDataCorreta(formData) {
             let data = ``;
@@ -221,7 +248,9 @@ export default {
         if (localStorage.getItem('reunioes')) {
             try {
                 this.reunioes = JSON.parse(localStorage.getItem('reunioes'));
-                this.list_reuniao = true;
+                if(this.reunioes.length > 0) {
+                    this.list_reuniao = true;
+                }
             } catch (error) {
                 localStorage.removeItem('reunioes');
             }
@@ -315,8 +344,8 @@ export default {
         padding: 0 20px;
     }
 
-    // Scss da div para reuniões
-    .content-reuniao {
+    // Scss da div para reuniões e atividades
+    .content-card {
         background-color: transparent;
         max-height: 320px;
         overflow-y: auto;
@@ -326,8 +355,8 @@ export default {
             padding: 4px;
         }
 
-        .card-reuniao {
-            ~.card-reuniao {
+        .cards {
+            ~.cards {
              margin-top: 20px;
             }
         }
