@@ -22,15 +22,8 @@ week-organizer/
 │   │       ├── material-kit
 │   │       └── material-kit.scss
 │   ├── components
-│   │   ├── Badge.vue
-│   │   ├── Dropdown.vue
-│   │   ├── Modal.vue
-│   │   ├── Pagination.vue
-│   │   ├── Parallax.vue
-│   │   ├── Slider.vue
 │   │   ├── Tabs.vue
 │   │   ├── cards
-│   │   │   ├── LoginCard.vue
 │   │   │   └── NavTabsCard.vue
 │   │   └── index.js
 │   ├── layout
@@ -44,20 +37,10 @@ week-organizer/
 │   │   └── material-kit.js
 │   ├── router.js
 │   └── views
-│       ├── Index.vue
-│       ├── Landing.vue
-│       ├── Login.vue
-│       ├── Profile.vue
+│       ├── WeekOrganization.vue
 │       └── components
-│           ├── BasicElementsSection.vue
 │           ├── CardReuniaoSection.vue
-│           ├── JavascriptComponentsSection.vue
-│           ├── NavPillsSection.vue
-│           ├── NavigationSection.vue
-│           ├── NotificationsSection.vue
-│           ├── SmallNavigationSection.vue
-│           ├── TabsSection.vue
-│           └── TypographyImagesSection.vue
+│           └── CardAtividadesSection.vue
 └── vue.config.js
 
 ```
