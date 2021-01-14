@@ -50,12 +50,12 @@
                                         <md-tab id="tab-atividades" md-label="Reuniões" md-icon="group">
                                             <div v-if="list_reuniao">
                                                 <div class="content-reuniao">
-                                                    <div class="card-reuniao" v-for="(reuniao, index) in reunioes" :key='index' :data-reuniao="index" @click="apagarCardReuniao(index)" title="Apagar Reunião">
+                                                    <div class="card-reuniao" v-for="(reuniao, index) in reunioes" :key='index' :data-reuniao="index" @click="removerCardReuniao(index)" title="Remover Reunião">
                                                         <CardReuniao :assunto="reuniao.info" :data='reuniao.date' :group='reuniao.part'></CardReuniao>
                                                     </div>
                                                 </div>
                                                 <div class="content-button">
-                                                    <md-button class="md-primary button-apagar" @click="apagarListaReuniao" title="Apagar Toda Lista"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
+                                                    <md-button class="md-primary button-apagar" @click="limparListaReuniao" title="Limpar Toda Lista"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
                                                 </div>
                                             </div>
                                             <div class="content-warning" v-else>
@@ -80,13 +80,13 @@
                                                         <md-input class="content-form__assunto" v-model="FormReuniaoAssunto" type="text"></md-input>
                                                     </md-field>
                                                 </div>
-                                                <div class="md-layout-item md-size-25 md-medium-size-50 md-small-100">
+                                                <div class="md-layout-item md-size-25 md-medium-size-50 md-small-size-100">
                                                     <md-datepicker class="content-form__data" v-model="FormReuniaoData">
                                                         <md-icon class="icon-date">event</md-icon>
                                                         <label>Data</label>
                                                     </md-datepicker>
                                                 </div>
-                                                <div class="md-layout-item md-size-75 md-medium-size-50 md-small-100">
+                                                <div class="md-layout-item md-size-75 md-medium-size-50 md-small-size-100">
                                                     <md-field class="md-form-group content-form__participantes">
                                                         <md-icon>groups</md-icon>
                                                         <label>Participantes</label>
@@ -135,12 +135,14 @@ export default {
     },
     methods: {
         // Reuniões
-        apagarListaReuniao() {         
+        limparListaReuniao() {         
             this.reunioes = [];
+            this.saveReuniaoLS();
             this.list_reuniao = false;
         },
-        apagarCardReuniao(param) {
+        removerCardReuniao(param) {
             this.reunioes.splice(param,1);
+            this.saveReuniaoLS();
             if(this.reunioes.length === 0) {
                 this.list_reuniao = false;
             }
@@ -175,6 +177,7 @@ export default {
                     date: this.retornaDataCorreta(this.FormReuniaoData), 
                     part: this.FormReuniaoParticipantes,
                 });
+                this.saveReuniaoLS();
                 this.list_reuniao = true;
                 this.FormReuniaoAssunto = ''; 
                 this.FormReuniaoParticipantes = '';
@@ -197,10 +200,10 @@ export default {
         },
 
         //Salva localStorege
-        // saveReuniaoLS() {
-        //     const parsed = JSON.stringify(this.reunioes);
-        //     localStorage.setItem('reunioes', parsed);
-        // }
+        saveReuniaoLS() {
+            const parsed = JSON.stringify(this.reunioes);
+            localStorage.setItem('reunioes', parsed);
+        }
     },
     computed: {
         bgImage() {
@@ -210,10 +213,19 @@ export default {
         },
     },
     mounted() {
-      const svgs = Array.from(document.getElementsByClassName('md-date-icon'));
-      svgs.forEach(svg => svg.children[0].remove());
+        // Remover o svg do datepicker
+        const svgs = Array.from(document.getElementsByClassName('md-date-icon'));
+        svgs.forEach(svg => svg.children[0].remove());
 
-      //Verifica localStorege
+        //Verifica localStorege
+        if (localStorage.getItem('reunioes')) {
+            try {
+                this.reunioes = JSON.parse(localStorage.getItem('reunioes'));
+                this.list_reuniao = true;
+            } catch (error) {
+                localStorage.removeItem('reunioes');
+            }
+        }
     },
     
 }
@@ -282,6 +294,10 @@ export default {
                     color: #9124a3 !important;
                 }
             }
+        }
+
+        .button-adicionar {
+            margin-right: 20px;
         }
     }
 
