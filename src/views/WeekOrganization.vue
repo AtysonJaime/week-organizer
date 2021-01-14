@@ -55,29 +55,48 @@
                                                     </div>
                                                 </div>
                                                 <div class="content-button">
-                                                    <md-button class="md-primary md-round button-apagar" @click="apagarListaReuniao" title="Apagar Toda Lista"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
+                                                    <md-button class="md-primary button-apagar" @click="apagarListaReuniao" title="Apagar Toda Lista"><md-icon>delete_outline</md-icon>Apagar Lista</md-button>
                                                 </div>
                                             </div>
-                                            <div class="alert alert-warning" v-else>
-                                                <div class="container">
-                                                    <div class="alert-icon">
-                                                        <md-icon>warning</md-icon>
+                                            <div class="content-warning" v-else>
+                                                <div class="alert alert-warning">
+                                                    <div class="container">
+                                                        <div class="alert-icon">
+                                                            <md-icon>warning</md-icon>
+                                                        </div>
+                                                        <b> Nenhuma reunião adicionada até o momento </b>
                                                     </div>
-                                                    <b> Nenhuma reunião adicionada até o momento </b>
                                                 </div>
                                             </div>
+                                            
                                         </md-tab>
 
                                         <md-tab id="tab-form-atividades" md-label="Adicionar" md-icon="edit">
-                                            <p>
-                                                I think that’s a responsibility that I have, to push
-                                                possibilities, to show people, this is the level that things
-                                                could be at. I will be the leader of a company that ends up
-                                                being worth billions of dollars, because I got the answers.
-                                                I understand culture. I am the nucleus. I think that’s a
-                                                responsibility that I have, to push possibilities, to show
-                                                people, this is the level that things could be at.
-                                            </p>
+                                            <form id="form-reuniao" class="md-layout content-form">
+                                                <div class="md-layout-item md-size-100">
+                                                    <md-field class="md-form-group content-form__assunto">
+                                                        <md-icon>sticky_note_2</md-icon>
+                                                        <label>Assunto</label>
+                                                        <md-input class="content-form__assunto" v-model="FormReuniaoAssunto" type="text"></md-input>
+                                                    </md-field>
+                                                </div>
+                                                <div class="md-layout-item md-size-25 md-medium-size-50 md-small-100">
+                                                    <md-datepicker class="content-form__data" v-model="FormReuniaoData">
+                                                        <md-icon class="icon-date">event</md-icon>
+                                                        <label>Data</label>
+                                                    </md-datepicker>
+                                                </div>
+                                                <div class="md-layout-item md-size-75 md-medium-size-50 md-small-100">
+                                                    <md-field class="md-form-group content-form__participantes">
+                                                        <md-icon>groups</md-icon>
+                                                        <label>Participantes</label>
+                                                        <md-input v-model="FormReuniaoParticipantes" type="text"></md-input>
+                                                    </md-field>
+                                                </div>
+                                                <div class="content-button">
+                                                    <md-button class="md-primary button-adicionar" @click="adicionaCardReuniao">Adicionar</md-button>
+                                                </div>
+                                            </form>
                                         </md-tab>
                                     </md-tabs>
                                 </template>
@@ -107,28 +126,81 @@ export default {
     },
     data(){
         return {
-            list_reuniao:true,
-            reunioes: [
-                {info:"Relatados problemas nos componente x, y e z do padrão de interfaces", date:"05/01/2021", part:"Atyson Jaime, Andressa, Igor, João Vitor"},
-                {info:"Repasse de duvidas", date:"11/02/2021", part:"Atyson Jaime, Andressa"},
-                {info:"Reunião Gestore Front-end", date:"05/01/2021", part:"Atyson Jaime, Igor"},
-                {info:"Repasse de metas para as proximas etapas do Cosmos - Desing para o sistemas da Universidade Federal do Rio Grande do Norte", date:"25/05/2021", part:"Andressa, Igor, João Vitor"},
-            ],
+            list_reuniao:false,
+            reunioes: [],
+            FormReuniaoAssunto: '',
+            FormReuniaoData: new Date(),
+            FormReuniaoParticipantes: '',
         }
     },
     methods: {
-        apagarListaReuniao() {
-            const lista = document.getElementsByClassName('content-reuniao')[0];
-            if(lista.children.length > 0) {
-                lista.textContent = '';
-            }
-            this.list_reuniao = !this.list_reuniao;
+        // Reuniões
+        apagarListaReuniao() {         
+            this.reunioes = [];
+            this.list_reuniao = false;
         },
         apagarCardReuniao(param) {
-            const lista = Array.from(document.getElementsByClassName('card-reuniao'));
-            const filho = lista.find(element => element.getAttribute('data-reuniao') == param);
-            filho.remove();
-        }
+            this.reunioes.splice(param,1);
+            if(this.reunioes.length === 0) {
+                this.list_reuniao = false;
+            }
+        },
+        adicionaCardReuniao() {
+            const assunto = document.getElementsByClassName('content-form__assunto')[0];
+            const data = document.getElementsByClassName('content-form__data')[0];
+            const participantes = document.getElementsByClassName('content-form__participantes')[0];
+            
+            //Validações
+            if(this.FormReuniaoAssunto == '') {
+                assunto.classList.add('md-error');
+            } else {
+                assunto.classList.remove('md-error');
+            }
+
+            if(this.FormReuniaoData == '') {
+                data.classList.add('md-error');
+            } else {
+                data.classList.remove('md-error');
+            }
+
+            if(this.FormReuniaoParticipantes == '') {
+                participantes.classList.add('md-error');
+            } else {
+                participantes.classList.remove('md-error');
+            }
+
+            if(this.FormReuniaoAssunto != '' && this.FormReuniaoData != '' && this.FormReuniaoParticipantes != '') {
+                this.reunioes.push({
+                    info: this.FormReuniaoAssunto, 
+                    date: this.retornaDataCorreta(this.FormReuniaoData), 
+                    part: this.FormReuniaoParticipantes,
+                });
+                this.list_reuniao = true;
+                this.FormReuniaoAssunto = ''; 
+                this.FormReuniaoParticipantes = '';
+            };
+        },
+
+        //Funções Gerais
+        retornaDataCorreta(formData) {
+            let data = ``;
+            if(formData.getMonth() < 10){
+                if(formData.getDate() < 10) {
+                    data = `0${formData.getDate()}/0${formData.getMonth()+1}/${formData.getFullYear()}`
+                } else {
+                    data = `${formData.getDate()}/0${formData.getMonth()+1}/${formData.getFullYear()}`
+                }
+            } else {
+                data = `${formData.getDate()}/${formData.getMonth()+1}/${formData.getFullYear()}`
+            }
+            return data;
+        },
+
+        //Salva localStorege
+        // saveReuniaoLS() {
+        //     const parsed = JSON.stringify(this.reunioes);
+        //     localStorage.setItem('reunioes', parsed);
+        // }
     },
     computed: {
         bgImage() {
@@ -136,7 +208,14 @@ export default {
                 backgroundImage: `url(${this.image})`
             };
         },
-    }
+    },
+    mounted() {
+      const svgs = Array.from(document.getElementsByClassName('md-date-icon'));
+      svgs.forEach(svg => svg.children[0].remove());
+
+      //Verifica localStorege
+    },
+    
 }
 </script>
 
@@ -180,13 +259,13 @@ export default {
         font-weight: bold;
     }
 
-    // Scss do Botão apagar lista
+    // Scss dos Botões Apagar Lista ou Adicionar
     .content-button {
         display: flex;
         justify-content: flex-end;
         width: 100%;
 
-        .button-apagar{
+        .button-apagar, .button-adicionar{
             margin: 15px 0;
             border: 2px solid #9124a3;
             transition: background-color .5 linear;
@@ -206,6 +285,12 @@ export default {
         }
     }
 
+    // Scss dos Warning
+    .content-warning {
+        width: 100%;
+        padding: 0 20px;
+    }
+
     // Scss da div para reuniões
     .content-reuniao {
         background-color: transparent;
@@ -217,6 +302,16 @@ export default {
             ~.card-reuniao {
              margin-top: 20px;
             }
+        }
+    }
+    
+    // Scss da div para form
+    .content-form {
+        .md-datepicker {
+            .icon-date {
+                position: absolute;
+            }
+            
         }
     }
 </style>
