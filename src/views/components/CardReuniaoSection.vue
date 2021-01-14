@@ -1,12 +1,22 @@
 <template>
     <md-card md-with-hover>
         <md-card-content>
-            <h5 class="content-reuniao__title">Assunto:</h5>
-            <p class="content-reuniao__info">{{assunto}}</p>
-            <h5 class="content-reuniao__title">Data: </h5>
-            <p class="content-reuniao__info">{{data}}</p>
-            <h5 class="content-reuniao__title">Participantes: </h5>
-            <p class="content-reuniao__info">{{group}}</p>
+            <div class="md-layout">
+                <div class="md-layout-item md-size-100">
+                    <h5 class="content-reuniao__title">Assunto:</h5>
+                    <p class="content-reuniao__info">{{assunto}}</p>
+                </div>
+            </div>
+            <div class="md-layout">
+                <div class="md-layout-item md-size-20 md-medium-size-100">
+                    <h5 class="content-reuniao__title">Data: </h5>
+                    <p class="content-reuniao__info">{{data}}</p>
+                </div>
+                <div class="md-layout-item md-size-80 md-medium-size-100">
+                    <h5 class="content-reuniao__title">Participantes: </h5>
+                    <p class="content-reuniao__info">{{group}}</p>
+                </div>
+            </div>
         </md-card-content>
     </md-card>
 </template>

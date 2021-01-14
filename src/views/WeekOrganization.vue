@@ -10,9 +10,9 @@
         </div>
         <div class="main main-raised">
             <div class="section section-tabs">
-                <div id="nav-tabs" class="container">
+                <div id="nav-tabs">
                     <div class="md-layout">
-                        <!-- <div class="md-layout-item md-size-100">
+                        <div class="md-layout-item md-size-50 md-medium-size-100">
                             <nav-tabs-card no-label>
                                 <template slot="content">
                                     <md-tabs class="md-primary" md-alignment="left">
@@ -42,8 +42,8 @@
                                     </md-tabs>
                                 </template>
                             </nav-tabs-card>
-                        </div> -->
-                        <div class="md-layout-item md-size-100">
+                        </div>
+                        <div class="md-layout-item md-size-50 md-medium-size-100">
                             <nav-tabs-card no-label>
                                 <template slot="content">
                                     <md-tabs class="md-primary" md-alignment="left">
@@ -77,16 +77,16 @@
                                                     <md-field class="md-form-group content-form__assunto">
                                                         <md-icon>sticky_note_2</md-icon>
                                                         <label>Assunto</label>
-                                                        <md-input class="content-form__assunto" v-model="FormReuniaoAssunto" type="text"></md-input>
+                                                        <md-input v-model="FormReuniaoAssunto" type="text"></md-input>
                                                     </md-field>
                                                 </div>
-                                                <div class="md-layout-item md-size-25 md-medium-size-50 md-small-size-100">
+                                                <div class="md-layout-item md-size-35 md-medium-size-50 md-small-size-100">
                                                     <md-datepicker class="content-form__data" v-model="FormReuniaoData">
                                                         <md-icon class="icon-date">event</md-icon>
                                                         <label>Data</label>
                                                     </md-datepicker>
                                                 </div>
-                                                <div class="md-layout-item md-size-75 md-medium-size-50 md-small-size-100">
+                                                <div class="md-layout-item md-size-65 md-medium-size-50 md-small-size-100">
                                                     <md-field class="md-form-group content-form__participantes">
                                                         <md-icon>groups</md-icon>
                                                         <label>Participantes</label>
@@ -239,6 +239,14 @@ export default {
         height: 350px;
     }
 
+    .section {
+        padding: 70px;
+
+        @media screen  and (max-width: 769px) {
+            padding: 70px 20px;
+        }
+    }
+
     .brand {
         width: 100%;
         text-align: center;
@@ -313,6 +321,10 @@ export default {
         max-height: 320px;
         overflow-y: auto;
         padding: 15px;
+
+        @media screen  and (max-width: 426px) {
+            padding: 4px;
+        }
 
         .card-reuniao {
             ~.card-reuniao {
