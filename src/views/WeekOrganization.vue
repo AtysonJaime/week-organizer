@@ -40,7 +40,31 @@
                                         </md-tab>
 
                                         <md-tab id="tab-form-atividades" md-label="Adicionar" md-icon="edit">
-                                            
+                                            <form id="form-atividades" class="md-layout content-form">
+                                                <div class="md-layout-item md-size-35 md-medium-size-50 md-small-size-100">
+                                                    <md-datepicker class="content-form__data-atividade" v-model="FormAtividadeData">
+                                                        <md-icon class="icon-date">event</md-icon>
+                                                        <label>Data</label>
+                                                    </md-datepicker>
+                                                </div>
+                                                <div class="md-layout-item md-size-65 md-medium-size-50 md-small-size-100">
+                                                    <md-field class="md-form-group content-form__projeto">
+                                                        <md-icon>sticky_note_2</md-icon>
+                                                        <label>Projeto</label>
+                                                        <md-input v-model="FormAtividadeProjeto" type="text"></md-input>
+                                                    </md-field>
+                                                </div>
+                                                <div class="md-layout-item md-size-100">
+                                                    <md-field class="md-form-group content-form__atividades-realizadas">
+                                                        <md-icon>code</md-icon>
+                                                        <label>Atividades Realizadas</label>
+                                                        <md-textarea v-model="FormAtividadesRealizadas" md-autogrow></md-textarea>
+                                                    </md-field>
+                                                </div>
+                                                <div class="content-button">
+                                                    <md-button class="md-primary button-adicionar" @click="adicionaCardAtividade">Adicionar</md-button>
+                                                </div>
+                                            </form>
                                         </md-tab>
                                     </md-tabs>
                                 </template>
@@ -139,12 +163,11 @@ export default {
             FormReuniaoParticipantes: '',
 
             // Atividades
-            list_atividades:true,
-            atividades: [
-                {projeto: "Cosmos", date: "05/12/2022", atvRelizadas: "Correção de cards retangulares; Criação do conteudo principal"},
-                {projeto: "Padrão Vue", date: "05/10/2021", atvRelizadas: "Correção de cards retangulares; Criação do conteudo principal"},
-                {projeto: "Gestore Automatiza", date: "05/09/2012", atvRelizadas: "Correção de cards retangulares; Criação do conteudo principal"}
-            ],
+            list_atividades:false,
+            atividades: [],
+            FormAtividadeProjeto: '',
+            FormAtividadeData: new Date(),
+            FormAtividadesRealizadas: '',
         }
     },
     methods: {
@@ -165,6 +188,8 @@ export default {
             const assunto = document.getElementsByClassName('content-form__assunto')[0];
             const data = document.getElementsByClassName('content-form__data')[0];
             const participantes = document.getElementsByClassName('content-form__participantes')[0];
+
+            console.log("reuniao:", this.FormReuniaoData);
             
             //Validações
             if(this.FormReuniaoAssunto == '') {
@@ -173,7 +198,7 @@ export default {
                 assunto.classList.remove('md-error');
             }
 
-            if(this.FormReuniaoData == '') {
+            if(this.FormReuniaoData == null) {
                 data.classList.add('md-error');
             } else {
                 data.classList.remove('md-error');
@@ -211,6 +236,44 @@ export default {
                 this.list_atividades = false;
             }
         },
+        adicionaCardAtividade() {
+            const projeto = document.getElementsByClassName('content-form__projeto')[0];
+            const data = document.getElementsByClassName('content-form__data-atividade')[0];
+            const atv = document.getElementsByClassName('content-form__atividades-realizadas')[0];
+
+            console.log(this.FormAtividadeData);
+            //Validações
+            if(this.FormAtividadeProjeto == '') {
+                projeto.classList.add('md-error');
+            } else {
+                projeto.classList.remove('md-error');
+            }
+
+            if(this.FormAtividadeData == null) {
+                data.classList.add('md-error');
+            } else {
+                data.classList.remove('md-error');
+            }
+
+            if(this.FormAtividadesRealizadas == '') {
+                atv.classList.add('md-error');
+            } else {
+                atv.classList.remove('md-error');
+            }
+            
+            if(this.FormAtividadeProjeto != '' && this.FormAtividadeData != '' && this.FormAtividadesRealizadas != '') {
+                this.atividades.push({
+                    projeto: this.FormAtividadeProjeto, 
+                    date: this.retornaDataCorreta(this.FormAtividadeData), 
+                    atvRelizadas: this.FormAtividadesRealizadas,
+                });
+                // this.saveReuniaoLS();
+                this.list_atividades = true;
+                this.FormAtividadeProjeto = ''; 
+                this.FormAtividadesRealizadas = '';
+            }
+        },
+
         //Funções Gerais
         retornaDataCorreta(formData) {
             let data = ``;
@@ -364,11 +427,12 @@ export default {
     
     // Scss da div para form
     .content-form {
+        overflow-y: auto;
+        max-height: 200px;
         .md-datepicker {
             .icon-date {
                 position: absolute;
-            }
-            
+            } 
         }
     }
 </style>
