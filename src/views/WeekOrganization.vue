@@ -188,8 +188,6 @@ export default {
             const assunto = document.getElementsByClassName('content-form__assunto')[0];
             const data = document.getElementsByClassName('content-form__data')[0];
             const participantes = document.getElementsByClassName('content-form__participantes')[0];
-
-            console.log("reuniao:", this.FormReuniaoData);
             
             //Validações
             if(this.FormReuniaoAssunto == '') {
@@ -226,12 +224,12 @@ export default {
         //Atividades
         limparListaAtividades(){
             this.atividades = [];
-            //this.saveReuniaoLS();
+            this.saveAtividadesLS();
             this.list_atividades = false;
         },
         removerCardAtividade(param) {
             this.atividades.splice(param,1);
-            //this.saveReuniaoLS();
+            this.saveAtividadesLS();
             if(this.atividades.length === 0) {
                 this.list_atividades = false;
             }
@@ -241,7 +239,6 @@ export default {
             const data = document.getElementsByClassName('content-form__data-atividade')[0];
             const atv = document.getElementsByClassName('content-form__atividades-realizadas')[0];
 
-            console.log(this.FormAtividadeData);
             //Validações
             if(this.FormAtividadeProjeto == '') {
                 projeto.classList.add('md-error');
@@ -267,7 +264,7 @@ export default {
                     date: this.retornaDataCorreta(this.FormAtividadeData), 
                     atvRelizadas: this.FormAtividadesRealizadas,
                 });
-                // this.saveReuniaoLS();
+                this.saveAtividadesLS();
                 this.list_atividades = true;
                 this.FormAtividadeProjeto = ''; 
                 this.FormAtividadesRealizadas = '';
@@ -293,6 +290,10 @@ export default {
         saveReuniaoLS() {
             const parsed = JSON.stringify(this.reunioes);
             localStorage.setItem('reunioes', parsed);
+        },
+        saveAtividadesLS() {
+            const parsed = JSON.stringify(this.atividades);
+            localStorage.setItem('atividades', parsed);
         }
     },
     computed: {
@@ -316,6 +317,17 @@ export default {
                 }
             } catch (error) {
                 localStorage.removeItem('reunioes');
+            }
+        }
+
+        if (localStorage.getItem('atividades')) {
+            try {
+                this.atividades = JSON.parse(localStorage.getItem('atividades'));
+                if(this.atividades.length > 0) {
+                    this.list_atividades = true;
+                }
+            } catch (error) {
+                localStorage.removeItem('atividades');
             }
         }
     },
