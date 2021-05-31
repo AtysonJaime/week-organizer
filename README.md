@@ -1,49 +1,7 @@
 # week-organizer
 Simple way to save your tasks.
 
-## File Structure
+**Version 2.0 in progress.**
 
-Within the download you'll find the following directories and files:
+Please, access https://atysonjaime.github.io/week-organizer/#/ to old version
 
-```
-week-organizer/
-
-├── CHANGELOG.md
-├── README.md
-├── babel.config.js
-├── package.json
-├── public
-│   └── index.html
-├── src
-│   ├── App.vue
-│   ├── assets
-│   │   ├── img
-│   │   └── scss
-│   │       ├── material-kit
-│   │       └── material-kit.scss
-│   ├── components
-│   │   ├── Tabs.vue
-│   │   ├── cards
-│   │   │   └── NavTabsCard.vue
-│   │   └── index.js
-│   ├── layout
-│   │   ├── MainFooter.vue
-│   │   └── MainNavbar.vue
-│   ├── main.js
-│   ├── plugins
-│   │   ├── globalComponents.js
-│   │   ├── globalDirectives.js
-│   │   ├── globalMixins.js
-│   │   └── material-kit.js
-│   ├── router.js
-│   └── views
-│       ├── WeekOrganization.vue
-│       └── components
-│           ├── CardAtividadesSection.vue
-│           └── CardReuniaoSection.vue
-└── vue.config.js
-
-```
-
-<!-- ## Resources
-- [Live Preview](https://demos.creative-tim.com/vue-material-kit) -->
