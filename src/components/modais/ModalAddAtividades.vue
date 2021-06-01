@@ -1,16 +1,12 @@
 <template>
-  <!-- Para abrir o modal, precisa adicinar is-active no .modal e is-clipped no html -->
   <div id='modal-atividade-add' class="modal">
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="card">
         <div class="card-content">
           <div class="content">
-            <div class="notification is-danger is-light" v-show='erros.lenght > 0'>
-              <ul>
-                <li v-for="erro in erros" :key="erro"></li>
-              </ul>
-            </div>
+            <AlertErro :erros='errosForm' />
+            <h1 class="title is-4"> Adicionar atividades realizadas</h1>
             <div class="columns block">
               <div class="column is-6">
                 <div class="field">
@@ -61,7 +57,7 @@
             <div class="columns block is-right container-button">
               <div class="field is-grouped">
                 <div class="control">
-                  <button class="button is-success">
+                  <button class="button is-success" @click="addAtividade()">
                     <span class="icon is-medium">
                       <i class="fas fa-check"></i>
                     </span>
@@ -80,23 +76,49 @@
 
 <script>
 import IconeForm from '../Icones_forms.vue';
+import AlertErro from '../AlertErro.vue';
 
 export default {
   data() {
     return {
-      namoProjeto: '',
+      nomeProjeto: '',
       dataAtividade: '',
       atividadesRealizadas: '',
-      erros: [],
+      errosForm: [],
     };
   },
 
   components: {
     IconeForm,
+    AlertErro,
+  },
+
+  computed: {
+    verDatas() {
+      return this.errosForm;
+    },
   },
 
   methods: {
-
+    addAtividade() {
+      console.log(this.atividadesRealizadas.trim());
+      if (this.nomeProjeto.trim() === '') {
+        this.errosForm.push('Campo projeto não pode ser em branco');
+      }
+      if (this.dataAtividade === '') {
+        this.errosForm.push('Campo data não pode ser em branco');
+      }
+      if (this.atividadesRealizadas.trim() === '') {
+        this.errosForm.push('Campo atividades realizadas não pode ser em branco');
+      }
+      if (this.errosForm.length === 0) {
+        this.$emit('criacaoAtividade', {
+          projeto: this.nomeProjeto.trim(),
+          data: this.dataAtividade,
+          atividades: this.atividadesRealizadas.trim(),
+        });
+      }
+    },
   },
 };
 </script>

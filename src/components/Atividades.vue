@@ -16,7 +16,7 @@
           >
             Adicionar Atividade
           </button>
-          <ModalAddAtiv/>
+          <ModalAddAtiv @criacaoAtividade = 'addAtividade($event)'/>
         </div>
       </div>
     </section>
@@ -24,32 +24,20 @@
 
 <script>
 import ModalAddAtiv from './modais/ModalAddAtividades.vue';
+import FunctionModais from './mixins/functionModais';
 
 export default {
+  name: 'Atividades',
+
+  mixins: [FunctionModais],
+
   components: {
     ModalAddAtiv,
   },
 
   methods: {
-    openModal(dataModal) {
-      const modal = document.getElementById(dataModal);
-      const buttonBackground = modal.querySelector('.modal-background');
-      const buttonClose = modal.querySelector('.modal-close');
-      const html = document.querySelector('html');
-      html.classList.add('is-clipped');
-      modal.classList.add('is-active');
-      buttonBackground.addEventListener('click', () => {
-        this.closeModal(modal);
-      });
-      buttonClose.addEventListener('click', () => {
-        this.closeModal(modal);
-      });
-    },
-
-    closeModal(modal) {
-      const html = document.querySelector('html');
-      html.classList.remove('is-clipped');
-      modal.classList.remove('is-active');
+    addAtividade($event) {
+      console.log($event);
     },
   },
 };
