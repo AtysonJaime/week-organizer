@@ -7,7 +7,7 @@
 
       <div class="hero-body">
         <div class="container has-text-centered">
-          <p class="title is-1">
+          <p class="title is-1 is-spaced">
             Weekly Organizer
           </p>
           <p class="subtitle is-3">
@@ -17,7 +17,7 @@
       </div>
 
       <div class="hero-foot">
-        <nav class="tabs is-boxed is-fullwidth">
+        <nav class="tabs is-medium is-boxed is-fullwidth">
           <div class="container">
             <ul>
               <li :class="{'is-active' : isAtividades}">
@@ -49,17 +49,22 @@
         </nav>
       </div>
     </section>
-    <section class="section container display-content" v-show="isAtividades">
-      <h1 class="title">Section</h1>
-      <h2 class="subtitle">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
-      </h2>
+    <Atividades v-show="isAtividades"></Atividades>
+    <section class="section container display-content" v-show="isReunioes">
+      <div class="columns block">
+        <div class="column is-four-fifths">
+          <h2 class="subtitle is-4">
+            Nessa aba
+          </h2>
+        </div>
+      </div>
     </section>
   </div>
 </template>
 
 <script>
+import Atividades from './components/Atividades.vue';
+
 export default {
   data() {
     return {
@@ -68,6 +73,10 @@ export default {
       isOutros: false,
       isDificuldades: false,
     };
+  },
+
+  components: {
+    Atividades,
   },
 
   methods: {
@@ -117,8 +126,8 @@ export default {
         };
       }
     }
-    .section {
-
+    .button-add {
+      margin: auto 0;
     }
   };
 </style>
