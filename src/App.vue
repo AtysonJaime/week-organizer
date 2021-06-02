@@ -20,26 +20,30 @@
         <div class="container">
           <ul>
             <li :class="{'is-active' : isAtividades}">
-              <a @click="changeTab('Atividades')">
-                <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+              <a @click="changeTab('Atividades')" title="Acessar Atividades Realizadas">
+                <span class="icon is-small">
+                  <i class="fas fa-briefcase" aria-hidden="true"></i>
+                </span>
                 <span>Atividades Realizadas</span>
               </a>
             </li>
             <li :class="{'is-active' : isReunioes}">
-              <a @click="changeTab('Reunioes')">
-                <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+              <a @click="changeTab('Reunioes')" title="Acessar Reuniões">
+                <span class="icon is-small"><i class="fas fa-users" aria-hidden="true"></i></span>
                 <span>Reuniões</span>
               </a>
             </li>
             <li :class="{'is-active' : isOutros}">
-              <a @click="changeTab('Outros')">
-                <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+              <a @click="changeTab('Outros')" title="Acessar Ajudas e Estudos">
+                <span class="icon is-small">
+                  <i class="fas fa-hands-helping" aria-hidden="true"></i>
+                </span>
                 <span>Ajudas/Estudos</span>
               </a>
             </li>
             <li :class="{'is-active' : isDificuldades}">
-              <a @click="changeTab('Dificuldades')">
-                <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+              <a @click="changeTab('Dificuldades')" title="Acessar Dificuldades">
+                <span class="icon is-small"><i class="fas fa-wrench" aria-hidden="true"></i></span>
                 <span>Dificuldades</span>
               </a>
             </li>

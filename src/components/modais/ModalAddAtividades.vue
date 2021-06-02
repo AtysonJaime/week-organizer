@@ -11,7 +11,7 @@
               <div class="column is-6">
                 <div class="field">
                   <label class="label">
-                    <IconeForm classes='fas fa-laptop-code'></IconeForm>
+                    <Icone classes='fas fa-laptop-code'></Icone>
                     Projeto
                   </label>
                   <div class="control">
@@ -27,7 +27,7 @@
               <div class="column is-6">
                 <div class="field">
                   <label class="label">
-                    <IconeForm classes='far fa-calendar'></IconeForm>
+                    <Icone classes='far fa-calendar'></Icone>
                     Data da Realização
                   </label>
                   <div class="control">
@@ -40,7 +40,7 @@
               <div class="column is-12">
                 <div class="field">
                   <label class="label">
-                    <IconeForm classes='fas fa-tasks'></IconeForm>
+                    <Icone classes='fas fa-tasks'></Icone>
                     Atividades Realizadas
                   </label>
                   <div class="control">
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import IconeForm from '../Icones_forms.vue';
+import Icone from '../Icones.vue';
 import AlertErro from '../AlertErro.vue';
 
 export default {
@@ -89,14 +89,8 @@ export default {
   },
 
   components: {
-    IconeForm,
+    Icone,
     AlertErro,
-  },
-
-  computed: {
-    verDatas() {
-      return this.errosForm;
-    },
   },
 
   methods: {

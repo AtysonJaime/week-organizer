@@ -1,5 +1,5 @@
 <template>
-   <span class="icon is-small is-left">
+   <span class="icon is-small">
       <i :class="classes"></i>
     </span>
 </template>

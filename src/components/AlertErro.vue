@@ -1,6 +1,6 @@
 <template>
   <div class="notification is-danger is-light" v-show='erros.length != 0'>
-    <p><IconForm classes='fas fa-exclamation' /> Erros encontrados:</p>
+    <p><Icone classes='fas fa-exclamation' /> Erros encontrados:</p>
     <ul>
       <li v-for="erro in erros" :key="erro">{{erro}}</li>
     </ul>
@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import IconForm from './Icones_forms.vue';
+import Icone from './Icones.vue';
 
 export default {
   components: {
-    IconForm,
+    Icone,
   },
 
   props: {
