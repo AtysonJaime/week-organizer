@@ -63,6 +63,10 @@ export default {
         atividades: $event.atividades,
       });
     },
+
+    dltAtividade($event) {
+      this.cardAtividades = this.cardAtividades.filter((item) => item.id !== $event.idAtv);
+    },
   },
 };
 </script>

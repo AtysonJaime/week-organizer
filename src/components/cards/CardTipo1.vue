@@ -1,7 +1,11 @@
 <template>
-  <div class="column is-10">
+ <div class="column is-10">
     <div class="card">
-      <button class="button is-danger is-light button-delete" title="Excluir Cartão">
+      <button
+        class="button is-danger is-light button-delete is-outlined"
+        title="Excluir Cartão"
+        @click='deleteCard()'
+      >
         <Icone classes='fas fa-trash-alt'/>
       </button>
       <div class="card-content">
@@ -43,6 +47,7 @@ export default {
 
   props: {
     titulos: Object,
+    idDado: Number,
     dataDado: String,
     primDado: String,
     secunDado: String,
@@ -52,6 +57,12 @@ export default {
     ajustaDadosArray() {
       const newArray = this.secunDado.split('\n');
       return newArray;
+    },
+  },
+
+  methods: {
+    deleteCard() {
+      this.$emit('deletarAtividade', { idAtv: this.idDado });
     },
   },
 };
