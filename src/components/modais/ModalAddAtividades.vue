@@ -95,7 +95,6 @@ export default {
 
   methods: {
     addAtividade() {
-      console.log(this.atividadesRealizadas.trim());
       if (this.nomeProjeto.trim() === '') {
         this.errosForm.push('Campo projeto não pode ser em branco');
       }
@@ -111,6 +110,8 @@ export default {
           data: this.dataAtividade,
           atividades: this.atividadesRealizadas.trim(),
         });
+        this.nomeProjeto = '';
+        this.atividadesRealizadas = '';
       }
     },
   },
