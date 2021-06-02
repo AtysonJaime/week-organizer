@@ -1,10 +1,12 @@
 <template>
-  <div class="notification is-danger is-light" v-show='erros.length != 0'>
-    <p><Icone classes='fas fa-exclamation' /> Erros encontrados:</p>
-    <ul>
-      <li v-for="erro in erros" :key="erro">{{erro}}</li>
-    </ul>
-  </div>
+  <article class="message is-danger" v-show='erros.length != 0'>
+    <div class="message-body">
+      <p><Icone classes='fas fa-exclamation' /> Erros encontrados:</p>
+      <ul>
+        <li v-for="erro in erros" :key="erro">{{erro}}</li>
+      </ul>
+    </div>
+  </article>
 </template>
 
 <script>
