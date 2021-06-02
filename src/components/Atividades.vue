@@ -67,6 +67,16 @@ export default {
     };
   },
 
+  mounted() {
+    if (localStorage.getItem('atividades')) {
+      try {
+        this.cardAtividades = JSON.parse(localStorage.getItem('atividades'));
+      } catch (error) {
+        localStorage.removeItem('atividades');
+      }
+    }
+  },
+
   mixins: [FunctionModais],
 
   components: {
@@ -83,14 +93,22 @@ export default {
         data: $event.data,
         atividades: $event.atividades,
       });
+      this.saveAtividadesLS();
     },
 
     dltAtividade($event) {
       this.cardAtividades = this.cardAtividades.filter((item) => item.id !== $event.idAtv);
+      this.saveAtividadesLS();
     },
 
     dltTodasAtividades() {
       this.cardAtividades = [];
+      this.saveAtividadesLS();
+    },
+
+    saveAtividadesLS() {
+      const parsed = JSON.stringify(this.cardAtividades);
+      localStorage.setItem('atividades', parsed);
     },
   },
 };
