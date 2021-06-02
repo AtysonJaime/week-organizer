@@ -95,6 +95,7 @@ export default {
 
   methods: {
     addAtividade() {
+      this.errosForm = [];
       if (this.nomeProjeto.trim() === '') {
         this.errosForm.push('Campo projeto não pode ser em branco');
       }
