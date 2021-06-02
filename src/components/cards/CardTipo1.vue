@@ -1,5 +1,5 @@
 <template>
- <div class="column is-10">
+  <div class="column is-10">
     <div class="card">
       <button
         class="button is-danger is-light button-delete is-outlined"
@@ -17,7 +17,7 @@
             </div>
             <div class="column is-6">
               <p class="title is-4">{{titulos[1]}}:</p>
-              <p class="subtitle is-5">{{dataDado}}</p>
+              <p class="subtitle is-5">{{ajustaData}}</p>
             </div>
           </div>
           <div class="columns">
@@ -57,6 +57,15 @@ export default {
     ajustaDadosArray() {
       const newArray = this.secunDado.split('\n');
       return newArray;
+    },
+
+    ajustaData() {
+      const arrayData = this.dataDado.split('-');
+      const ano = arrayData[0];
+      const mes = arrayData[1];
+      const dia = arrayData[2];
+
+      return `${dia}/${mes}/${ano}`;
     },
   },
 
