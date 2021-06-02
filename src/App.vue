@@ -133,6 +133,14 @@ export default {
       margin: auto 0;
     }
 
+    .msg-alert{
+      margin: 40px;
+      text-align: center;
+      .message-body{
+        background-color: #fff1be;
+      }
+    }
+
     .div-cards {
       padding: 3%;
       overflow-y: auto;
@@ -143,6 +151,11 @@ export default {
         box-shadow: 0px 0em 1em 1em #0a0a0a1f, -2px 0 0px 1px #0a0a0a05;
         border: 2px solid #00000026;
       }
+    }
+
+    .content-button {
+      display: flex;
+      justify-content: flex-end;
     }
 
     .footer {
