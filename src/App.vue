@@ -49,6 +49,13 @@
     </div>
   </section>
   <Atividades v-show="isAtividades"></Atividades>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        @2021, por Atyson Jaime.
+      </p>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -119,6 +126,10 @@ export default {
     }
     .button-add {
       margin: auto 0;
+    }
+    footer {
+      background-color: #3298dc;
+      color: #fff;
     }
   };
 </style>
