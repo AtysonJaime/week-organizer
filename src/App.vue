@@ -128,10 +128,24 @@ export default {
         };
       }
     }
+
     .button-add {
       margin: auto 0;
     }
-    footer {
+
+    .div-cards {
+      padding: 3%;
+      overflow-y: auto;
+      height: auto;
+      max-height: 800px;
+      justify-content: space-around;
+      .card {
+        box-shadow: 0px 0em 1em 1em #0a0a0a1f, -2px 0 0px 1px #0a0a0a05;
+        border: 2px solid #00000026;
+      }
+    }
+
+    .footer {
       background-color: #3298dc;
       color: #fff;
     }

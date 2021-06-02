@@ -12,12 +12,22 @@
           <button
             class="button is-link is-medium is-fullwidth"
             data-target="modal-atividade-add" aria-haspopup="true"
-            @click="openModal('modal-atividade-add')"
+            @click="openModal('modal-atividade-add')" title="Adicionar Atividade"
           >
             Adicionar Atividade
           </button>
           <ModalAddAtiv @criacaoAtividade = 'addAtividade($event)'/>
         </div>
+      </div>
+      <div class="container div-cards columns is-multiline">
+        <CardAtividade
+          v-for="card in cardAtividades"
+          :key="card.id"
+          :titulos='cardTitulos'
+          :dataDado='card.data'
+          :primDado='card.projeto'
+          :secunDado='card.atividades'
+        />
       </div>
     </section>
 </template>
@@ -25,19 +35,33 @@
 <script>
 import ModalAddAtiv from './modais/ModalAddAtividades.vue';
 import FunctionModais from './mixins/functionModais';
+import CardAtividade from './cards/CardTipo1.vue';
 
 export default {
   name: 'Atividades',
+
+  data() {
+    return {
+      cardTitulos: ['Projeto', 'Data', 'Atividades Realizadas'],
+      cardAtividades: [],
+    };
+  },
 
   mixins: [FunctionModais],
 
   components: {
     ModalAddAtiv,
+    CardAtividade,
   },
 
   methods: {
     addAtividade($event) {
-      console.log($event);
+      this.cardAtividades.push({
+        id: Date.now(),
+        projeto: $event.projeto,
+        data: $event.data,
+        atividades: $event.atividades,
+      });
     },
   },
 };
