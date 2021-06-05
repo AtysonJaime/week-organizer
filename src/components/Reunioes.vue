@@ -67,15 +67,15 @@ export default {
     };
   },
 
-  // mounted() {
-  //   if (localStorage.getItem('atividades')) {
-  //     try {
-  //       this.cardAtividades = JSON.parse(localStorage.getItem('atividades'));
-  //     } catch (error) {
-  //       localStorage.removeItem('atividades');
-  //     }
-  //   }
-  // },
+  mounted() {
+    if (localStorage.getItem('reunioes')) {
+      try {
+        this.cardReuniao = JSON.parse(localStorage.getItem('reunioes'));
+      } catch (error) {
+        localStorage.removeItem('reunioes');
+      }
+    }
+  },
 
   mixins: [FunctionModais],
 
@@ -93,20 +93,23 @@ export default {
         data: $event.data,
         assuntos: $event.assuntos,
       });
+      this.saveReunioesLS();
     },
 
     dltReuniao($event) {
       this.cardReuniao = this.cardReuniao.filter((item) => item.id !== $event.id);
+      this.saveReunioesLS();
     },
 
     dltTodasReunioes() {
       this.cardReuniao = [];
+      this.saveReunioesLS();
     },
 
-    // saveAtividadesLS() {
-    //   const parsed = JSON.stringify(this.cardAtividades);
-    //   localStorage.setItem('atividades', parsed);
-    // },
+    saveReunioesLS() {
+      const parsed = JSON.stringify(this.cardReuniao);
+      localStorage.setItem('reunioes', parsed);
+    },
   },
 };
 </script>
