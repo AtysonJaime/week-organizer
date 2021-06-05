@@ -34,7 +34,7 @@
           :primDado='card.projeto'
           :secunDado='card.atividades'
           :idDado='card.id'
-          @deletarAtividade='dltAtividade($event)'
+          @deletarCard='dltAtividade($event)'
         />
       </div>
       <div class="content-button">
@@ -97,7 +97,7 @@ export default {
     },
 
     dltAtividade($event) {
-      this.cardAtividades = this.cardAtividades.filter((item) => item.id !== $event.idAtv);
+      this.cardAtividades = this.cardAtividades.filter((item) => item.id !== $event.id);
       this.saveAtividadesLS();
     },
 

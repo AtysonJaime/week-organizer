@@ -71,7 +71,7 @@ export default {
 
   methods: {
     deleteCard() {
-      this.$emit('deletarAtividade', { idAtv: this.idDado });
+      this.$emit('deletarCard', { id: this.idDado });
     },
   },
 };
