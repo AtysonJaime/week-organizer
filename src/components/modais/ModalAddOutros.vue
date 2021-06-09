@@ -139,11 +139,11 @@ export default {
         this.$emit('criacaoOutro', {
           nomeTypo: this.nomeEstudosAjuda,
           componentes: this.estudosAjudas.trim(),
-          data: this.dataReuniao,
+          data: this.data,
           nomePonto: this.nomePontos,
           pontosAbordados: this.pontos.trim(),
         });
-        this.EstudosAjudas = '';
+        this.estudosAjudas = '';
         this.pontos = '';
       }
     },

@@ -54,6 +54,7 @@
   </section>
   <Atividades v-show="isAtividades"></Atividades>
   <Reunioes v-show="isReunioes"></Reunioes>
+  <Outros v-show="isOutros"></Outros>
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
@@ -66,6 +67,7 @@
 <script>
 import Atividades from './components/Atividades.vue';
 import Reunioes from './components/Reunioes.vue';
+import Outros from './components/EstudosAjudas.vue';
 
 export default {
   name: 'App',
@@ -82,6 +84,7 @@ export default {
   components: {
     Atividades,
     Reunioes,
+    Outros,
   },
 
   methods: {
