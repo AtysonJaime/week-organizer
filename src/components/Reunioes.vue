@@ -29,11 +29,7 @@
         <CardReuniao
           v-for="card in cardReuniao"
           :key="card.id"
-          :titulos='cardTitulos'
-          :dataDado='card.data'
-          :primDado='card.componentes'
-          :secunDado='card.assuntos'
-          :idDado='card.id'
+          :dados='card'
           @deletarCard='dltReuniao($event)'
         />
       </div>
@@ -62,7 +58,6 @@ export default {
 
   data() {
     return {
-      cardTitulos: ['Componentes', 'Data', 'Assuntos Tratados'],
       cardReuniao: [],
     };
   },
@@ -89,9 +84,11 @@ export default {
     addReunioes($event) {
       this.cardReuniao.push({
         id: Date.now(),
-        componentes: $event.componentes,
+        nomeCampoPrimario: 'Componentes',
+        nomeCampoSecundario: 'Assuntos Tratados',
+        descricaoPrimario: $event.componentes,
         data: $event.data,
-        assuntos: $event.assuntos,
+        descricaoSecundario: $event.assuntos,
       });
       this.saveReunioesLS();
     },

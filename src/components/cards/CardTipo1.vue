@@ -12,17 +12,17 @@
         <div class="content">
           <div class="columns">
             <div class="column is-6">
-              <p class="title is-4">{{titulos[0]}}:</p>
-              <p class="subtitle is-5">{{primDado}}</p>
+              <p class="title is-4">{{dados.nomeCampoPrimario}}:</p>
+              <p class="subtitle is-5">{{dados.descricaoPrimario}}</p>
             </div>
             <div class="column is-6">
-              <p class="title is-4">{{titulos[1]}}:</p>
+              <p class="title is-4">Data da Realização:</p>
               <p class="subtitle is-5">{{ajustaData}}</p>
             </div>
           </div>
           <div class="columns">
             <div class="column is-12">
-              <p class="title is-4">{{titulos[2]}}:</p>
+              <p class="title is-4">{{dados.nomeCampoSecundario}}:</p>
               <p
                 class="subtitle is-5 p-atividades"
                 v-for="(text,index) in ajustaDadosArray" :key="index"
@@ -46,21 +46,17 @@ export default {
   },
 
   props: {
-    titulos: Object,
-    idDado: Number,
-    dataDado: String,
-    primDado: String,
-    secunDado: String,
+    dados: Object,
   },
 
   computed: {
     ajustaDadosArray() {
-      const newArray = this.secunDado.split('\n');
+      const newArray = this.dados.descricaoSecundario.split('\n');
       return newArray;
     },
 
     ajustaData() {
-      const arrayData = this.dataDado.split('-');
+      const arrayData = this.dados.data.split('-');
       const ano = arrayData[0];
       const mes = arrayData[1];
       const dia = arrayData[2];
@@ -71,7 +67,7 @@ export default {
 
   methods: {
     deleteCard() {
-      this.$emit('deletarCard', { id: this.idDado });
+      this.$emit('deletarCard', { id: this.dados.id });
     },
   },
 };

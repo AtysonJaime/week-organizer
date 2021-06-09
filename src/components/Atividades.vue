@@ -29,11 +29,7 @@
         <CardAtividade
           v-for="card in cardAtividades"
           :key="card.id"
-          :titulos='cardTitulos'
-          :dataDado='card.data'
-          :primDado='card.projeto'
-          :secunDado='card.atividades'
-          :idDado='card.id'
+          :dados="card"
           @deletarCard='dltAtividade($event)'
         />
       </div>
@@ -62,7 +58,6 @@ export default {
 
   data() {
     return {
-      cardTitulos: ['Projeto', 'Data', 'Atividades Realizadas'],
       cardAtividades: [],
     };
   },
@@ -89,9 +84,11 @@ export default {
     addAtividade($event) {
       this.cardAtividades.push({
         id: Date.now(),
-        projeto: $event.projeto,
+        nomeCampoPrimario: 'Projeto',
+        nomeCampoSecundario: 'Atividades Realizadas',
+        descricaoPrimario: $event.projeto,
         data: $event.data,
-        atividades: $event.atividades,
+        descricaoSecundario: $event.atividades,
       });
       this.saveAtividadesLS();
     },
