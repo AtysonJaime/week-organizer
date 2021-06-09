@@ -166,4 +166,8 @@ export default {
     justify-content: flex-end;
     padding: 2%;
   }
+
+  .fa-hands-helping {
+    margin-right: 1px;
+  }
 </style>
