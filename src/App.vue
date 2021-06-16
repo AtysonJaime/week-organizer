@@ -55,6 +55,7 @@
   <Atividades v-show="isAtividades"></Atividades>
   <Reunioes v-show="isReunioes"></Reunioes>
   <Outros v-show="isOutros"></Outros>
+  <Dificuldades v-show="isDificuldades"></Dificuldades>
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
@@ -68,6 +69,7 @@
 import Atividades from './components/Atividades.vue';
 import Reunioes from './components/Reunioes.vue';
 import Outros from './components/EstudosAjudas.vue';
+import Dificuldades from './components/Dificuldades.vue';
 
 export default {
   name: 'App',
@@ -85,6 +87,7 @@ export default {
     Atividades,
     Reunioes,
     Outros,
+    Dificuldades,
   },
 
   methods: {
