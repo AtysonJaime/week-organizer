@@ -37,7 +37,7 @@
         <button
           class="button is-danger is-outlined"
           title="Apagar toda lista de reuniões"
-          @click='dltTodas()'
+          @click='dltTodasDificuldades()'
         >
           <Icone classes='fas fa-trash-alt'/>
           <span>Apagar toda lista</span>
@@ -98,7 +98,7 @@ export default {
       this.saveDificuldadesLS();
     },
 
-    dltTodas() {
+    dltTodasDificuldades() {
       this.listDificuldades = [];
       this.saveDificuldadesLS();
     },
