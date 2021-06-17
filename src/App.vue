@@ -198,4 +198,130 @@ export default {
       color: #fff;
     }
   };
+
+  #app.alto-contraste {
+    background-color: #000015 !important;
+
+    h1,h2,h3,h4,h5,p,span,i, label {
+      color: #fff;
+    }
+
+    a,button,.button {
+      background-color: #fff;
+      color: #000;
+
+      i,span {
+        color: #000;
+      }
+
+      &:hover, &:focus {
+        background-color: #ffdd57;
+        color: #000 !important;
+
+        i,span {
+          color: #000;
+        }
+      }
+
+      &.is-danger {
+        border-color: #fff;
+        &:hover, &:focus {
+          border-color: #ffdd57;
+        }
+      }
+    }
+
+    section, footer {
+      background-color: #000015 !important;
+    }
+
+    section {
+      &.hero {
+        border-bottom: 5px solid #fff !important;
+
+        .hero-foot {
+          li {
+            &.is-active {
+              a {
+                border: 2px solid #fff;
+                background-color: #fff;
+                color: #000;
+
+                i,span {
+                  color: #000;
+                }
+              }
+            }
+
+            a {
+              background-color: #000015;
+              color: #fff;
+
+              i,span {
+                color: #fff;
+              }
+
+              &:hover, &:focus {
+                background-color: #ffdd57;
+                color: #000;
+
+                i,span {
+                  color: #000;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .message {
+        .message-body {
+          border-width: 1px 1px 1px 4px;
+          background-color: #ffdd57;
+          p, i {
+            color: #000015 !important;
+          }
+        }
+      }
+
+      .card{
+        box-shadow: none;
+        border: 2px solid #ffdd57;
+        background-color: #000015;
+      }
+    }
+
+    input, textarea {
+      background: #000015;
+      color: #fff;
+      box-shadow: none;
+
+      &::placeholder {
+        color: #fff;
+      }
+
+      &:focus {
+        border-color: #ffdd57;
+      }
+
+      &[type="date"] {
+        &::-webkit-calendar-picker-indicator {
+          filter: invert(100%);
+        }
+
+        &::-webkit-datetime-edit-month-field,
+        &::-webkit-datetime-edit-day-field,
+        &::-webkit-datetime-edit-year-field {
+          &:focus {
+            background: #fff;
+            color: #000015;
+          }
+        }
+      }
+    }
+
+    footer {
+      border-top: 5px solid #ffdd57;
+    }
+  }
 </style>
