@@ -1,8 +1,8 @@
 <template>
   <section class="hero is-info is-medium">
-    <!-- <div class="hero-head">
+    <div class="hero-head">
       <Header/>
-    </div> -->
+    </div>
 
     <div class="hero-body">
       <div class="container has-text-centered">
