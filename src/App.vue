@@ -164,6 +164,36 @@ export default {
       outline: none;
     }
 
+    .hero-head {
+      .navbar-item {
+        a:focus {
+          color:#3273dc;
+          background-color: #fff;
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .hero-foot {
+      ul {
+        li {
+          a {
+            &:focus{
+              background-color: rgba(10,10,10,.1);
+            }
+          }
+
+          &.is-active {
+            a:focus {
+              color:#3273dc;
+              background-color: #fff;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+
     .button-add {
       margin: auto 0;
     }
