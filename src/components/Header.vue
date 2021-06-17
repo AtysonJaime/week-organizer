@@ -15,14 +15,30 @@
 
 <script>
 export default {
+  mounted() {
+    if (localStorage.getItem('altoContraste')) {
+      try {
+        if (JSON.parse(localStorage.getItem('altoContraste')) === 'true') {
+          this.changeAltoContraste();
+        }
+      } catch (error) {
+        localStorage.removeItem('atividades');
+      }
+    }
+  },
+
   methods: {
     changeAltoContraste() {
       const pagina = document.getElementById('app');
+      let parsed = '';
       if (pagina.classList.contains('alto-contraste')) {
         pagina.classList.remove('alto-contraste');
+        parsed = JSON.stringify('false');
       } else {
         pagina.classList.add('alto-contraste');
+        parsed = JSON.stringify('true');
       }
+      localStorage.setItem('altoContraste', parsed);
     },
   },
 };
