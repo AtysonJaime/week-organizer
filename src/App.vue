@@ -20,7 +20,12 @@
         <div class="container">
           <ul>
             <li :class="{'is-active' : isAtividades}">
-              <a @click="changeTab('Atividades')" title="Acessar Atividades Realizadas">
+              <a
+                @click="changeTab('Atividades')"
+                title="Acessar Atividades Realizadas"
+                tabindex="0"
+                @keyup.enter="changeTab('Atividades')"
+              >
                 <span class="icon is-small">
                   <i class="fas fa-briefcase" aria-hidden="true"></i>
                 </span>
@@ -28,13 +33,23 @@
               </a>
             </li>
             <li :class="{'is-active' : isReunioes}">
-              <a @click="changeTab('Reunioes')" title="Acessar Reuniões">
+              <a
+                @click="changeTab('Reunioes')"
+                title="Acessar Reuniões"
+                tabindex="0"
+                @keyup.enter="changeTab('Reunioes')"
+              >
                 <span class="icon is-small"><i class="fas fa-users" aria-hidden="true"></i></span>
                 <span>Reuniões</span>
               </a>
             </li>
             <li :class="{'is-active' : isOutros}">
-              <a @click="changeTab('Outros')" title="Acessar Ajudas e Estudos">
+              <a
+                @click="changeTab('Outros')"
+                title="Acessar Ajudas e Estudos"
+                tabindex="0"
+                @keyup.enter="changeTab('Outros')"
+              >
                 <span class="icon is-small">
                   <i class="fas fa-hands-helping" aria-hidden="true"></i>
                 </span>
@@ -42,7 +57,12 @@
               </a>
             </li>
             <li :class="{'is-active' : isDificuldades}">
-              <a @click="changeTab('Dificuldades')" title="Acessar Dificuldades">
+              <a
+                @click="changeTab('Dificuldades')"
+                title="Acessar Dificuldades"
+                tabindex="0"
+                @keyup.enter="changeTab('Dificuldades')"
+              >
                 <span class="icon is-small"><i class="fas fa-wrench" aria-hidden="true"></i></span>
                 <span>Dificuldades</span>
               </a>
@@ -70,6 +90,7 @@ import Atividades from './components/Atividades.vue';
 import Reunioes from './components/Reunioes.vue';
 import Outros from './components/EstudosAjudas.vue';
 import Dificuldades from './components/Dificuldades.vue';
+import Header from './components/Header.vue';
 
 export default {
   name: 'App',
@@ -88,6 +109,7 @@ export default {
     Reunioes,
     Outros,
     Dificuldades,
+    Header,
   },
 
   methods: {
@@ -136,6 +158,10 @@ export default {
           transition: background-color 0.5s;
         };
       }
+    }
+
+    a {
+      outline: none;
     }
 
     .button-add {

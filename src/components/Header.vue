@@ -2,7 +2,12 @@
   <nav class="navbar">
     <div class="container">
       <span class="navbar-item">
-        <a class="button is-info is-inverted" @click.prevent='changeAltoContraste'>
+        <a
+          class="button is-info is-inverted"
+          @keyup.enter="changeAltoContraste"
+          @click.prevent='changeAltoContraste'
+          tabindex="0"
+        >
           <span class="icon">
             <i class="fas fa-adjust"></i>
           </span>
