@@ -14,6 +14,11 @@ export const functionModais = {
       buttonClose.addEventListener('click', () => {
         this.closeModal(modal);
       });
+
+      if (dataModal === 'modal-outros-add' || dataModal === 'modal-dificuldades-add') {
+        const inputCheckbox = modal.querySelector('input[type="radio"]');
+        inputCheckbox.checked = true;
+      }
     },
 
     closeModal(modal) {
