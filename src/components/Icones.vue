@@ -1,7 +1,7 @@
 <template>
-   <span class="icon is-small">
-      <i :class="classes"></i>
-    </span>
+  <span class="icon is-small">
+    <i :class="classes"></i>
+  </span>
 </template>
 
 <script>
